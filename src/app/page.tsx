@@ -1,10 +1,9 @@
-import {Button} from "@/components/ui/button";
+import PdfContainer from "@/components/NoSSRComponent";
 
 export default function Home() {
-  return (
-    <div>
-      <Button>Button</Button>
-      <h1>Hello World!</h1>
-    </div>
-  );
+    return (
+        <div>
+            <PdfContainer/>
+        </div>
+    );
 }
