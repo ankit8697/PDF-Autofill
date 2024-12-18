@@ -16,7 +16,7 @@ export const getPdfImageCanvas = async (
     height: number;
 }> => {
     const pdfPage = await pdf.getPage(page);
-    const viewport = pdfPage.getViewport({scale: 1});
+    const viewport = pdfPage.getViewport({scale: 1.3});
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
     if (context) {
@@ -44,6 +44,7 @@ export default function PDFShape({pdfCanvas, width, height}: Props) {
         <Shape
             width={width}
             height={height}
+            preventDefault={false}
             sceneFunc={(context, shape) => {
                 // Reset the canvas state
                 context.save();

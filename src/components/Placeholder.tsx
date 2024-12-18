@@ -1,23 +1,19 @@
 "use client"
-import {DragEvent, useRef, useState} from 'react';
+import {DragEvent, useRef} from 'react';
 import {Button} from "@/components/ui/button";
 import {GripVertical} from "lucide-react";
+import {cn} from "@/lib/utils"; // Assuming you're using shadcn/ui's cn utility
 
 type Props = {
     label: string;
+    className?: string; // Make className optional
 };
 
-export default function Placeholder({label}: Props) {
-    const [isDragging, setIsDragging] = useState(false);
+export default function Placeholder({label, className}: Props) {
     const buttonRef = useRef<HTMLButtonElement>(null);
 
     const handleDragStart = (e: DragEvent<HTMLButtonElement>) => {
         e.dataTransfer.setData('text/plain', label);
-        setIsDragging(true);
-    };
-
-    const handleDragEnd = () => {
-        setIsDragging(false);
     };
 
     return (
@@ -25,10 +21,8 @@ export default function Placeholder({label}: Props) {
             ref={buttonRef}
             draggable
             onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-            className={`
-                cursor-grab 
-                ${isDragging ? 'opacity-50' : ''} 
+            className={cn(
+                `cursor-grab 
                 w-48 
                 whitespace-normal 
                 break-words 
@@ -37,11 +31,12 @@ export default function Placeholder({label}: Props) {
                 py-2 
                 flex 
                 items-center 
-                justify-between
-            `}
+                justify-between`,
+                className // Pass in any additional classNames
+            )}
         >
-            <GripVertical className="flex-shrink-0"/>
             <span className="flex-grow pr-2">{label}</span>
+            <GripVertical className="flex-shrink-0"/>
         </Button>
     );
 }

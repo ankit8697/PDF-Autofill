@@ -11,8 +11,13 @@ import {
     PaginationPrevious,
 } from "@/components/ui/pagination";
 import {Separator} from "@/components/ui/separator";
+import {cn} from "@/lib/utils";
 
-export default function PDFHolder() {
+type Props = {
+    className?: string,
+}
+
+export default function PDFHolder({className}: Props) {
     const [pageNumber, setPageNumber] = useState(1);
     const [pageCount, setPageCount] = useState(0);
     const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
@@ -39,7 +44,7 @@ export default function PDFHolder() {
 
     return (
         canvas && (
-            <div className="flex flex-col items-center border-2 border-gray-200 rounded-md p-3 my-5 mx-auto"
+            <div className={cn("flex flex-col items-center border-2 border-gray-200 rounded-md", className)}
                  style={{width: containerWidth}}>
                 <div style={{width}} className="flex flex-col items-center">
                     <Stage
